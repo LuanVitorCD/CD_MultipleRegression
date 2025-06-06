@@ -315,7 +315,7 @@ def update_grafico(mes_selecionado):
         y='umidade', 
         z='sensacao_termica',
         color='Mês',
-        color_discrete_sequence=["#2155c5", "#fd00f5", "#24e4be"],  # Tons de azul
+        color_discrete_sequence=["#2155c5", "#9900ff", "#24e4be"],  # Tons de azul
         hover_data=['dia'],
         title=titulo,
         labels={
@@ -330,14 +330,16 @@ def update_grafico(mes_selecionado):
     temp_range = np.linspace(df['temperatura'].min(), df['temperatura'].max(), 20)
     umid_range = np.linspace(df['umidade'].min(), df['umidade'].max(), 20)
     xx, yy = np.meshgrid(temp_range, umid_range)
-    zz = model.predict(np.column_stack((xx.ravel(), yy.ravel()))).reshape(xx.shape)
+    predict_data = pd.DataFrame(np.column_stack((xx.ravel(), yy.ravel())), 
+                          columns=['temperatura', 'umidade'])
+    zz = model.predict(predict_data).reshape(xx.shape)
     
     surface = go.Surface(
         x=xx,
         y=yy,
         z=zz,
         colorscale='Viridis',
-        opacity=0.3,
+        opacity=0.5,
         showscale=False
     )
     fig.add_trace(surface)
@@ -385,8 +387,8 @@ def update_grafico(mes_selecionado):
         ),
         margin=dict(l=0, r=0, b=0, t=40),
         legend=dict(
-            title_font=dict(color=cor_detalhes),
-            font=dict(color=cor_texto),
+            title_font=dict(color=cor_detalhes, size=24),
+            font=dict(color=cor_texto, size=20),
             bgcolor='rgba(0,0,0,0)'
         )
     )
