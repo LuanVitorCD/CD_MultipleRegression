@@ -42,9 +42,9 @@ variaveis = x.columns
 termos = ' + '.join([f"({coef:.4f} × {var})" for coef, var in zip(coeficientes, variaveis)])
 
 #Para ver das datas
-datas = [f"2024-01-{dia:02d}" for dia in range(1, 32)]
-datas += [f"2024-02-{dia:02d}" for dia in range(1, 29)]
-datas += [f"2024-03-{dia:02d}" for dia in range(1, 32)]
+datas = [f"2025-01-{dia:02d}" for dia in range(1, 32)]
+datas += [f"2025-02-{dia:02d}" for dia in range(1, 29)]
+datas += [f"2025-03-{dia:02d}" for dia in range(1, 32)]
 df['data'] = pd.to_datetime(datas)
 df['Mês'] = df['data'].dt.strftime('%B')
 df['dia'] = df['data'].dt.day
@@ -91,7 +91,7 @@ app.layout = html.Div(
                     }
                 ),
                 html.P(
-                    "Análise da sensação térmica em função da temperatura e umidade",
+                    "Análise da sensação térmica na estação meteorológica da Agropecuária Santa Terezinha, situada na zona rural de Cruz Alta (RS), com base na temperatura do ar e umidade relativa, entre janeiro e março de 2025.",
                     style={
                         'fontSize': '1.1rem'
                     }
@@ -451,7 +451,7 @@ def update_grafico(mes_selecionado, theme):
     else:
         bg_color = '#ffffff'
         text_color = '#333333'
-        grid_color = '#e0e0e0'
+        grid_color = '#2a2e3a'
     
     #Scatter 3D
     fig = px.scatter_3d(
