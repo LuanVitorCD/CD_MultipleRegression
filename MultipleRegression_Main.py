@@ -102,6 +102,7 @@ app.layout = html.Div(
                         html.Span('🌙', id='theme-icon', style={'fontSize': '1.5rem'})
                     ],
                     style={
+                        'display': 'flex',
                         'position': 'absolute',
                         'top': '10px',
                         'right': '10px',
@@ -262,7 +263,8 @@ app.layout = html.Div(
                             clearable=True,
                             style={
                                 'width': '200px',
-                                'border': f'1px solid {cor_detalhes}'
+                                'border': f'1px solid {cor_detalhes}',
+                                'color': 'black'
                             },
                             placeholder='Selecione um mês',
                         )
