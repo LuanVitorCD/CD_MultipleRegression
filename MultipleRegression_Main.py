@@ -82,7 +82,7 @@ app.layout = html.Div(
             },
             children=[
                 html.H1(
-                    "Dashboard: Sensação Térmica",
+                    "Sensação Térmica",
                     style={
                         'color': cor_detalhes,
                         'fontSize': '2.5rem',
@@ -91,7 +91,7 @@ app.layout = html.Div(
                     }
                 ),
                 html.P(
-                    "Análise de sensação térmica baseada em temperatura e umidade",
+                    "Análise da sensação térmica em função da temperatura e umidade",
                     style={
                         'fontSize': '1.1rem'
                     }
