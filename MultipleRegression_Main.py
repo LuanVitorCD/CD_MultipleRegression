@@ -69,7 +69,8 @@ app.layout = html.Div(
         'color': cor_texto,
         'fontFamily': 'Arial, sans-serif',
         'minHeight': '100vh',
-        'padding': '20px'
+        'padding': '20px',
+        'textAlign': 'center'
     },
     children=[
         # Cabeçalho
@@ -193,7 +194,10 @@ app.layout = html.Div(
                     id='grafico-3d',
                     style={
                         'height': '600px',
-                        'width': '100%'
+                        'width': '90%',  # Ajuste para menos que 100% para dar margem
+                        'display': 'inline-block',  # Isso ajuda no alinhamento central
+                        'margin': '0 auto',  # Centraliza horizontalmente
+                        'textAlign': 'center'
                     }
                 )
             ]
@@ -315,7 +319,7 @@ def update_grafico(mes_selecionado):
         y='umidade', 
         z='sensacao_termica',
         color='Mês',
-        color_discrete_sequence=["#2155c5", "#fd00f5", "#24e4be"],  # Tons de azul
+        color_discrete_sequence=["#007fff", "#91ffe9", "#00ff26"],  #["#55f873", "#857fff", "#09d4ac"] 
         hover_data=['dia'],
         title=titulo,
         labels={
@@ -330,16 +334,25 @@ def update_grafico(mes_selecionado):
     temp_range = np.linspace(df['temperatura'].min(), df['temperatura'].max(), 20)
     umid_range = np.linspace(df['umidade'].min(), df['umidade'].max(), 20)
     xx, yy = np.meshgrid(temp_range, umid_range)
-    zz = model.predict(np.column_stack((xx.ravel(), yy.ravel()))).reshape(xx.shape)
+    predict_data = pd.DataFrame(np.column_stack((xx.ravel(), yy.ravel())), 
+                          columns=['temperatura', 'umidade'])
+    zz = model.predict(predict_data).reshape(xx.shape)
     
     surface = go.Surface(
-        x=xx,
-        y=yy,
-        z=zz,
-        colorscale='Viridis',
-        opacity=0.3,
-        showscale=False
-    )
+    x=xx,
+    y=yy,
+    z=zz,
+    surfacecolor=xx,  # Usa temperatura para definir a cor
+    colorscale=[ 
+        [0.0, "#006EFF"], #0000ff
+        [0.5, "#FBFF0A"], #FFF674
+        [1.0, "#CA0838"] #CA0838
+    ],
+    cmin=df['temperatura'].min(),   # Limite inferior da escala
+    cmax=df['temperatura'].max(),  # Corta os 10% mais quentes
+    opacity=0.65,
+    showscale=False
+)
     fig.add_trace(surface)
     
     # Configurações dos traços
@@ -376,17 +389,17 @@ def update_grafico(mes_selecionado):
                 zerolinecolor='#2a2e3a',
                 title_font=dict(color=cor_detalhes)
             ),
-            aspectratio=dict(x=1, y=1, z=1),  # Proporções iguais para aspecto de cubo
-            camera=dict(eye=dict(x=1.5, y=1.5, z=1.5))  # Perspectiva angular
+            aspectratio=dict(x=1.6, y=1.6, z=1.6),  # Proporções iguais para aspecto de cubo
+            camera=dict(eye=dict(x=-2.5, y=-2.4, z=1.5))  # Perspectiva angular
         ),
         title=dict(
             x=0.5,
             font=dict(size=20, color=cor_detalhes)
         ),
-        margin=dict(l=0, r=0, b=0, t=40),
+        margin=dict(l=180, r=0, b=100, t=40),
         legend=dict(
-            title_font=dict(color=cor_detalhes),
-            font=dict(color=cor_texto),
+            title_font=dict(color=cor_detalhes, size=24),
+            font=dict(color=cor_texto, size=20),
             bgcolor='rgba(0,0,0,0)'
         )
     )
