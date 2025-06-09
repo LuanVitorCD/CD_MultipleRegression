@@ -39,7 +39,9 @@ r2 = r2_score(y, model.predict(x))
 coeficientes = model.coef_
 intercepto = model.intercept_
 variaveis = x.columns
-termos = ' + '.join([f"({coef:.4f} × {var})" for coef, var in zip(coeficientes, variaveis)])
+
+# Alteração 1: Usar x e z no lugar de x1 e x2
+termos = ' + '.join([f"({coef:.4f} × {var})" for coef, var in zip(coeficientes, ['x', 'z'])])
 
 #Para ver das datas
 datas = [f"2025-01-{dia:02d}" for dia in range(1, 32)]
@@ -153,13 +155,31 @@ app.layout = html.Div(
                             }
                         ),
                         html.P(
-                            f"Sensação térmica = {intercepto:.4f} + {termos}",
+                            f"y = {intercepto:.4f} + {termos}",
                             style={
                                 'fontSize': '16px',
                                 'padding': '15px',
                                 'backgroundColor': 'rgba(0, 0, 0, 0.1)',
                                 'borderRadius': '5px',
                                 'overflowX': 'auto'
+                            }
+                        ),
+                        # Alteração 2: Adicionar legenda explicativa
+                        html.Div(
+                            [
+                                html.Div("Legenda:", style={'fontWeight': 'bold', 'marginBottom': '5px'}),
+                                html.Div("y = sensação térmica (°C)"),
+                                html.Div("x = temperatura do ar (°C)"),
+                                html.Div("z = umidade relativa do ar (%)")
+                            ],
+                            style={
+                                'fontSize': '14px',
+                                'textAlign': 'left',
+                                'marginTop': '15px',
+                                'padding': '10px',
+                                'backgroundColor': 'rgba(0, 168, 255, 0.1)',
+                                'borderRadius': '5px',
+                                'borderLeft': f'3px solid {cor_detalhes}'
                             }
                         )
                     ]
