@@ -168,9 +168,9 @@ app.layout = html.Div(
                         html.Div(
                             [
                                 html.Div("Legenda:", style={'fontWeight': 'bold', 'marginBottom': '5px'}),
-                                html.Div("y = sensação térmica (°C)"),
+                                html.Div("z = sensação térmica (°C)"),
                                 html.Div("x = temperatura do ar (°C)"),
-                                html.Div("z = umidade relativa do ar (%)")
+                                html.Div("y = umidade relativa do ar (%)")
                             ],
                             style={
                                 'fontSize': '14px',
