@@ -40,7 +40,6 @@ coeficientes = model.coef_
 intercepto = model.intercept_
 variaveis = x.columns
 
-# Alteração 1: Usar x e z no lugar de x1 e x2
 termos = ' + '.join([f"({coef:.4f} × {var})" for coef, var in zip(coeficientes, ['x', 'z'])])
 
 #Para ver das datas
@@ -106,7 +105,7 @@ app.layout = html.Div(
                     style={
                         'display': 'flex',
                         'position': 'absolute',
-                        'top': '10px',
+                        'top': '-20px',
                         'right': '10px',
                         'height': '50px',
                         'width': '50px',
@@ -164,7 +163,7 @@ app.layout = html.Div(
                                 'overflowX': 'auto'
                             }
                         ),
-                        # Alteração 2: Adicionar legenda explicativa
+                        #Adicionando legenda explicativa
                         html.Div(
                             [
                                 html.Div("Legenda:", style={'fontWeight': 'bold', 'marginBottom': '5px'}),
