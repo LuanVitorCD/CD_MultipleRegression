@@ -40,7 +40,7 @@ coeficientes = model.coef_
 intercepto = model.intercept_
 variaveis = x.columns
 
-termos = ' + '.join([f"({coef:.4f} × {var})" for coef, var in zip(coeficientes, ['x', 'z'])])
+termos = ' + '.join([f"{coef:.4f}{var}" for coef, var in zip(coeficientes, ['x', 'y'])])
 
 #Para ver das datas
 datas = [f"2025-01-{dia:02d}" for dia in range(1, 32)]
@@ -154,7 +154,7 @@ app.layout = html.Div(
                             }
                         ),
                         html.P(
-                            f"y = {intercepto:.4f} + {termos}",
+                            f"z = {intercepto:.4f} + {termos}",
                             style={
                                 'fontSize': '16px',
                                 'padding': '15px',
