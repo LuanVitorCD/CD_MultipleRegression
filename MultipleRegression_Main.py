@@ -155,9 +155,9 @@ app.layout = html.Div(
                             [
                                 html.Span('y', style={'fontStyle': 'italic'}), ' = ',
                                 f"{intercepto:.4f} + ",
-                                html.Span(f"{coeficientes[0]:.4f}", style={'fontStyle': 'italic'}),
+                                html.Span(f"{coeficientes[0]:.4f}"),
                                 html.Span('x₁', style={'fontStyle': 'italic'}), ' + ',
-                                html.Span(f"{coeficientes[1]:.4f}", style={'fontStyle': 'italic'}),
+                                html.Span(f"{coeficientes[1]:.4f}"),
                                 html.Span('x₂', style={'fontStyle': 'italic'})
                             ],
                             style={
