@@ -166,7 +166,7 @@ app.layout = html.Div(
                         #Adicionando legenda explicativa
                         html.Div(
                             [
-                                html.Div("Legenda:", style={'fontWeight': 'bold', 'marginBottom': '5px'}),
+                                html.Div("Em que:", style={'fontWeight': 'bold', 'marginBottom': '5px'}),
                                 html.Div("z = sensação térmica (°C)"),
                                 html.Div("x = temperatura do ar (°C)"),
                                 html.Div("y = umidade relativa do ar (%)")
