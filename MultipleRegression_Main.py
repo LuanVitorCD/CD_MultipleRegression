@@ -32,15 +32,13 @@ data = {
 df = pd.DataFrame(data)
 
 #Modelo de regressão
-x = df[['temperatura', 'umidade']]
-y = df['sensacao_termica']
-model = LinearRegression().fit(x, y)
-r2 = r2_score(y, model.predict(x))
+x1 = df[['temperatura', 'umidade']]
+x2 = df['sensacao_termica']
+model = LinearRegression().fit(x1, x2)
+r2 = r2_score(x2, model.predict(x1))
 coeficientes = model.coef_
 intercepto = model.intercept_
-variaveis = x.columns
-
-termos = ' + '.join([f"{coef:.4f}{var}" for coef, var in zip(coeficientes, ['x', 'y'])])
+variaveis = x1.columns
 
 #Para ver das datas
 datas = [f"2025-01-{dia:02d}" for dia in range(1, 32)]
@@ -154,7 +152,14 @@ app.layout = html.Div(
                             }
                         ),
                         html.P(
-                            f"z = {intercepto:.4f} + {termos}",
+                            [
+                                html.Span('y', style={'fontStyle': 'italic'}), ' = ',
+                                f"{intercepto:.4f} + ",
+                                html.Span(f"{coeficientes[0]:.4f}", style={'fontStyle': 'italic'}),
+                                html.Span('x₁', style={'fontStyle': 'italic'}), ' + ',
+                                html.Span(f"{coeficientes[1]:.4f}", style={'fontStyle': 'italic'}),
+                                html.Span('x₂', style={'fontStyle': 'italic'})
+                            ],
                             style={
                                 'fontSize': '16px',
                                 'padding': '15px',
@@ -167,9 +172,9 @@ app.layout = html.Div(
                         html.Div(
                             [
                                 html.Div("Em que:", style={'fontWeight': 'bold', 'marginBottom': '5px'}),
-                                html.Div("z = sensação térmica (°C)"),
-                                html.Div("x = temperatura do ar (°C)"),
-                                html.Div("y = umidade relativa do ar (%)")
+                                html.Div([html.Span('y', style={'fontStyle': 'italic'}), " = sensação térmica (°C)"]),
+                                html.Div([html.Span('x₁', style={'fontStyle': 'italic'}), " = temperatura do ar (°C)"]), #x\u2081
+                                html.Div([html.Span('x₂', style={'fontStyle': 'italic'}), " = umidade relativa do ar (%)"]) #x\u2082
                             ],
                             style={
                                 'fontSize': '14px',
