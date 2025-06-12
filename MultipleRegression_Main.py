@@ -161,6 +161,7 @@ app.layout = html.Div(
                                 html.Span('x₂', style={'fontStyle': 'italic'})
                             ],
                             style={
+                                'fontFamily': 'Cambria Math',
                                 'fontSize': '16px',
                                 'padding': '15px',
                                 'backgroundColor': 'rgba(0, 0, 0, 0.1)',
@@ -172,9 +173,9 @@ app.layout = html.Div(
                         html.Div(
                             [
                                 html.Div("Em que:", style={'fontWeight': 'bold', 'marginBottom': '5px'}),
-                                html.Div([html.Span('y', style={'fontStyle': 'italic'}), " = sensação térmica (°C)"]),
-                                html.Div([html.Span('x₁', style={'fontStyle': 'italic'}), " = temperatura do ar (°C)"]), #x\u2081
-                                html.Div([html.Span('x₂', style={'fontStyle': 'italic'}), " = umidade relativa do ar (%)"]) #x\u2082
+                                html.Div([html.Span('y', style={'fontFamily': 'Cambria Math', 'fontStyle': 'italic'}), " = sensação térmica (°C)"]),
+                                html.Div([html.Span('x₁', style={'fontFamily': 'Cambria Math', 'fontStyle': 'italic'}), " = temperatura do ar (°C)"]), #x\u2081
+                                html.Div([html.Span('x₂', style={'fontFamily': 'Cambria Math', 'fontStyle': 'italic'}), " = umidade relativa do ar (%)"]) #x\u2082
                             ],
                             style={
                                 'fontSize': '14px',
@@ -386,7 +387,7 @@ def update_theme(theme):
         'minHeight': '100vh',
         'padding': '20px',
         'textAlign': 'center',
-        'fontFamily': 'arial'
+        'fontFamily': 'Arial'
     }
     
     card_style = {
